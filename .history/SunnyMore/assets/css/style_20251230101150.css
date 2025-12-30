@@ -1023,9 +1023,6 @@ video {
 .items-start {
   align-items: flex-start;
 }
-.items-start img {
-  width: 120px;
-}
 
 .items-end {
   align-items: flex-end;
