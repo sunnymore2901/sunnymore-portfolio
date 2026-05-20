@@ -1303,7 +1303,7 @@ video {
 
 .bg-secondary {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 233 217/var(--tw-bg-opacity));
+  background-color: #eaf7ff;
 }
 
 .bg-white {
