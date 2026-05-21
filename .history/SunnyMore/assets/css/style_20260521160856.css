@@ -1509,8 +1509,8 @@ video {
   font-family: "Inter", sans-serif;
 }
 
-.font-BricolageGrotesque {
-  font-family: "Bricolage Grotesque", sans-serif;
+.font-Syne {
+  font-family: "Syne", sans-serif;
 }
 
 .font-sans {
@@ -1891,7 +1891,7 @@ body.offcanvas-open {
 }
 
 .strock-text {
-  font-family: "Bricolage Grotesque", sans-serif;
+  font-family: "Syne", sans-serif;
   font-size: 3rem;
   line-height: 1;
   font-weight: 700;
@@ -2975,4 +2975,3 @@ a {
     padding-left: 17%;
   }
 }
-
