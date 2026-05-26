@@ -207,11 +207,20 @@
       .done(function (response) {
 
         // Make sure that the formMessages div has the 'success' class.
-        $(formMessages).removeClass('error');
-        $(formMessages).addClass('success');
+        $(formMessages).removeClass('error').addClass('success');
+
+        // Determine message text from response (handle JSON objects returned by APIs like Web3Forms)
+        var messageText = 'Message sent successfully.';
+        if (response) {
+          if (typeof response === 'object') {
+            messageText = response.message || (response.success ? 'Message sent successfully.' : JSON.stringify(response));
+          } else {
+            messageText = response;
+          }
+        }
 
         // Set the message text.
-        $(formMessages).text(response);
+        $(formMessages).text(messageText);
 
         // Clear the form.
         $('#contact-form [name="name"]').val('');
@@ -225,15 +234,22 @@
       .fail(function (data) {
 
         // Make sure that the formMessages div has the 'error' class.
-        $(formMessages).removeClass('success');
-        $(formMessages).addClass('error');
+        $(formMessages).removeClass('success').addClass('error');
 
-        // Set the message text.
-        if (data.responseText !== '') {
-          $(formMessages).text(data.responseText);
-        } else {
-          $(formMessages).text('Oops! An error occured and your message could not be sent.');
+        // Try to extract a useful error message from the response
+        var errMsg = 'Oops! An error occurred and your message could not be sent.';
+        if (data && data.responseJSON && data.responseJSON.message) {
+          errMsg = data.responseJSON.message;
+        } else if (data && data.responseText) {
+          try {
+            var parsed = JSON.parse(data.responseText);
+            errMsg = parsed.message || data.responseText;
+          } catch (e) {
+            errMsg = data.responseText;
+          }
         }
+
+        $(formMessages).text(errMsg);
 
       });
 
